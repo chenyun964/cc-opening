@@ -12,4 +12,6 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::get('clicked', 'ClickController@click');
+Route::get('list', 'ClickController@list');
+Route::get('clicked', 'ClickController@clicked');
+Route::get('reset', 'ClickController@reset');
