@@ -16,7 +16,7 @@ class CreateClicksTable extends Migration
         Schema::create('clicks', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('clicks')->default(0);
-            $table->integer('total')->default(9);
+            $table->integer('total')->default(10);
             $table->timestamps();
         });
     }

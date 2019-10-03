@@ -10,6 +10,12 @@ class ClickController extends Controller
     public function list()
     {
       $list = Click::orderBy('updated_at', 'desc')->first();
+      if(!$list || $list->clicks == 11){
+        $click = new Click();
+        $click->save();
+        $new_list = Click::orderBy('updated_at', 'desc')->first();
+        return response()->json(['list' => $new_list]);
+      }
       return response()->json(['list' => $list]);
     }
 
@@ -17,14 +23,11 @@ class ClickController extends Controller
     {
         $old_click = Click::orderBy('updated_at', 'desc')->first();
         $click = new Click();
-        if($old_click){
-          if($old_click->clicks < $old_click->total) {
-            $click->clicks = $old_click->clicks + 1;
-          }
+        if($old_click->clicks < $old_click->total) {
+          $click->clicks = $old_click->clicks + 1;
         }
         $click->save();
-        $clicked = Click::find($click->id);
-        return $clicked;
+        return response()->json(['list' => $click]);
     }
 
     public function reset()
